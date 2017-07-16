@@ -2,11 +2,11 @@ import Foundation
 import ROXCore
 
 class Register {
-    static func handleConfiguration(reflecting: RoxConfiguration){
+    static func handleContainer(reflecting: RoxContainer){
         var objcNamespace : String? = nil
-        if let objcConfiguration = reflecting as? NSObject {
-            ROXCore.registerClass(objcConfiguration)
-            objcNamespace = NSStringFromClass(type(of: objcConfiguration))
+        if let objcContainer = reflecting as? NSObject {
+            ROXCore.registerClass(objcContainer)
+            objcNamespace = NSStringFromClass(type(of: objcContainer))
         }
         
         let props = Mirror(reflecting: reflecting).children

@@ -1,0 +1,45 @@
+//
+//  ROXFlag.h
+//  ROX
+//
+//  Created by Elad Cohen on 3/19/17.
+//  Copyright © 2017 DeDoCo. All rights reserved.
+//
+
+#import <Foundation/Foundation.h>
+#import "ROXVariant.h"
+
+/**
+ This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
+ */
+
+@interface ROXFlag : ROXVariant
+
+/**
+ a property to indicate if the flag is enabled or disabled
+ */
+@property (readonly, nonatomic) BOOL isEnabled;
+
+/**
+ Runs block is flag is enabled
+ 
+ @param codeBlock will get invoked (synchronously) if flag is enabled
+ */
+- (void)enabled:(void (^)(void))codeBlock;
+
+/**
+ Runs block is flag is disabled
+ 
+ @param codeBlock will get invoked (synchronously) if flag is disabled
+ */
+- (void)disabled:(void (^)(void))codeBlock;
+/**
+ Runs one of the given block based on flag status
+ 
+ @param enabledCodeBlock will get invoked (synchronously) if flag is enabled
+ @param disabledCodeBlock will get invoked (synchronously) if flag is disabled
+ */
+
+- (void)enabled:(void (^)(void))enabledCodeBlock disabled:(void (^)(void))disabledCodeBlock;
+
+@end

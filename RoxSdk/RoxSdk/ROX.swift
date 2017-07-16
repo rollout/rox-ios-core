@@ -1,9 +1,12 @@
 import Foundation
 import ROXCore
 /**
- This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment configuration.
+ This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
  
- - Methods:
+ 
+ - SeeAlso: [ROXFlag](../objc/Classes/ROXFlag.html)
+ 
+ 
  ```swift
  open class ROXFlag : ROXVariant {
  
@@ -16,57 +19,83 @@ import ROXCore
  }
 
  ```
- 
 
- - SeeAlso: [ROXFlag](../objc/Classes/ROXFlag.html)
-**/
+ 
+*/
 public typealias RoxFlag = ROXFlag
 
 /**
  This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
- 
- - Methods:
-    - `open var value: String { get }`
-    - `public init(defaultValue: String)`
 
  
  - SeeAlso: [ROXConfigurationString](../objc/Classes/ROXConfigurationString.html)
- **/
+
+ 
+ ```swift
+ open class ROXConfigurationString {
+ 
+    open var value: String { get }
+    public init(defaultValue: String)
+ 
+ }
+ ```
+
+ */
 
 public typealias RoxConfigurationString = ROXConfigurationString
 
 /**
- This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
- 
- - Methods:
- - `open var value: Int { get }`
- - `public init(defaultValue: Int)`
- 
+ This class is the API for a remote configuration Int that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
  
  - SeeAlso: [ROXConfigurationInt](../objc/Classes/ROXConfigurationInt.html)
- **/
+
+ ```swift
+ open class ROXConfigurationInt {
+ 
+ open var value: Int { get }
+ public init(defaultValue: Int)
+ 
+ }
+ ```
+ 
+ */
 public typealias RoxConfigurationInt = ROXConfigurationInt
 /**
- This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
- 
- - Methods:
- - `open var value: Double { get }`
- - `public init(defaultValue: Double)`
- 
+ This class is the API for a remote configuration Double that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
  
  - SeeAlso: [ROXConfigurationDouble](../objc/Classes/ROXConfigurationDouble.html)
- **/
+ 
+ 
+ ```swift
+ open class ROXConfigurationDouble {
+ 
+ open var value: Double { get }
+ public init(defaultValue: Double)
+ 
+ }
+ ```
+ 
+ 
+ */
 public typealias RoxConfigurationDouble = ROXConfigurationDouble
 /**
- This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
+ This class is the API for a remote configuration Bool that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
  
- - Methods:
- - `open var value: Bool { get }`
- - `public init(defaultValue: Bool)`
- 
- 
+
  - SeeAlso: [ROXConfigurationBool](../objc/Classes/ROXConfigurationBool.html)
- **/
+
+ 
+ ```swift
+ open class ROXConfigurationBool {
+ 
+ open var value: Bool { get }
+ public init(defaultValue: Bool)
+ 
+ }
+ ```
+ 
+ 
+ */
 public typealias RoxConfigurationBool = ROXConfigurationBool
 
 
@@ -75,8 +104,8 @@ public typealias RoxConfigurationBool = ROXConfigurationBool
  - You use this flag for the following:
     
     - Intialize ROX SDK using `ROX.setup(withKey:)`
-    - Register configuration instances using `ROX.register(_:)`
-    - Retrieve configuration instances using `ROX.get(_:)`
+    - Register container instances using `ROX.register(_:)`
+    - Retrieve container instances using `ROX.get(_:)`
     - Load custom properties with `ROX.setCustomProperty(key:value:)`
     - Present the flags view controller with `ROX.flagsViewController()`
 
@@ -84,25 +113,52 @@ public typealias RoxConfigurationBool = ROXConfigurationBool
 
 
 public class ROX {
-    static var store = [String: RoxConfiguration]()
+    static var store = [String: RoxContainer]()
     
     /**
-     Register a configuration instance to ROX system, the same instance can be retrieved by using `ROX.get(_:)` function
+     Loads the SDK, usually called as part of `AppDelegate.application:didFinishLaunchingWithOptions:`
      
-     - parameter  configuration: The instance to register, this instance values are set at `ROX.sync()`, `ROX.setup(withKey:)`, or a if the app goes into foreground
+     Checks if a cached experimentation container exists, and loads a container.
+     
+     Executes an async network call to fetch the experiment container from the ROX server and calculates experiments and target groups.
+     
+     - Parameter key: The app key (taken from ROX dashboard)
+     */
+    public static func setup(withKey key: String) {
+        ROXCore.setup(withKey: key)
+    }
+    
+    /**
+     Loads the SDK, usually called as part of `AppDelegate.application:didFinishLaunchingWithOptions:`
+     
+     Checks if a cached experimentation container exists, and loads a container.
+     
+     Executes an async network call to fetch the experiment container from the ROX server and calculates experiments and target groups.
+     
+     
+     - Parameter key: a unique identifier from type String generated from ROX dashboard
+     - Parameter options: setup options
+     
+     */
+    public static func setup(withKey key: String, options: ROXOptions) {
+        ROXCore.setup(withKey: key, options: options)
+    }
+    
+
+    
+    /**
+     Register a container instance to ROX system, the same instance can be retrieved by using `ROX.get(_:)` function
+     
+     - parameter  container: The instance to register, this instance values are set at `ROX.sync()`, `ROX.setup(withKey:)`, or a if the app goes into foreground
      
      - Note: this method should be called **only once** for a given class
      
      */
-    public static func register(_ configuration: RoxConfiguration) {
-        guard let configurationClass = type(of: configuration) as? AnyClass else {
-            print("type of \(configuration) is not AnyClass. Will not register")
-            return
-        }
+    public static func register(_ container: RoxContainer) {
+        Register.handleContainer(reflecting: container)
         
-        Register.handleConfiguration(reflecting: configuration)
-        
-        store[NSStringFromClass(configurationClass)] = configuration
+        let containerClass = type(of: container)
+        store[NSStringFromClass(containerClass)] = container
     }
     
     /**
@@ -112,52 +168,40 @@ public class ROX {
      - Returns: The instance that was registered
     
      */
-    public static func get<T: RoxConfiguration>(_ clazz: T.Type) -> T? {
-        guard let anyClazz = clazz as? AnyClass else {
-            return nil
-        }
+    public static func get<T:RoxContainer>(_ clazz: T.Type) -> T? {
+        let container = store[NSStringFromClass(clazz)]
         
-        let configuration = store[NSStringFromClass(anyClazz)]
-        
-        return configuration as? T
-    }
-    /**
-     Loads the SDK, usually called as part of `AppDelegate.application:didFinishLaunchingWithOptions:`
-     
-     Checks if a cached experimentation configuration exists, and loads a configuration.
-     
-     Executes an async network call to fetch the experiment configuration from the ROX server and calculates experiments and target groups.
-     
-     - Parameter key: The app key (taken from ROX dashboard)
-    */
-    public static func setup(withKey key: String) {
-        ROXCore.setup(withKey: key)
+        return container as? T
     }
     
     /**
-     Loads the SDK, usually called as part of `AppDelegate.application:didFinishLaunchingWithOptions:`
-     
-     Checks if a cached experimentation configuration exists, and loads a configuration.
-     
-     Executes an async network call to fetch the experiment configuration from the ROX server and calculates experiments and target groups.
+     Recalculate the rules of experiments allocation base on new data
      
      
-     - Parameter key: a unique identifier from type String generated from ROX dashboard
-     - Parameter options: setup options
-
+     - SeeAlso: `ROX.unfreeze()`
+     
+     - Note: Usually called after the user has logged in to refresh ROX custom properties
+     - Note: if a flag has already been used (had impression) is is freezed and the calculation will not change the flag state, to change the flag state you need to unfreeze the flag right after the sync call
+     
      */
-    public static func setup(withKey key: String, options: ROXOptions) {
-        ROXCore.setup(withKey: key, options: options)
+    
+    public static func sync() {
+        ROXCore.sync()
     }
-
+    
     /**
-     Check if ROX is disabled.
+     Unfreeze the state of all flags in code
      
-     - Returns: true if ROX is disabled (disabled from the server side).
+     When a flag is used in code, his value gets frozen in the app untill the next app foreground event. Calling this function will unfreeze all flags, and using a flag will return it's most updated value
+     
+     - SeeAlso: [Flags Consistency](https://support.rollout.io/docs/flags-consistency)
+     
      */
-    public static func roxDisabled() -> Bool {
-        return ROXCore.roxDisabled()
+    public static func unfreeze() {
+        ROXCore.unfreeze()
     }
+    
+    
     /**
      A view to control feature flags values locally on a mobile device or simulator.
      
@@ -173,18 +217,6 @@ public class ROX {
         return ROXCore.flagsViewController()
     }
     
-    /**
-     Checks if device is a test device.
-     
-     Test device are managed by [App Settings](true if device is test device, false otherwise) in the dashboard
-     
-     - SeeAlso: [App Settings](true if device is test device, false otherwise)
-     
-     - Returns: true if device is test device, false otherwise.
-     */
-    public static func isTestDevice() -> Bool {
-        return ROXCore.isTestDevice()
-    }
     
     /**
      Sets a custom property value that can be used when creating target groups.
@@ -340,30 +372,28 @@ public class ROX {
     public static func setCustomProperty(key: String, value: @escaping () -> Double) {
         ROXCore.setCustomComputedDoubleProperty(value, forKey: key)
     }
+    
     /**
-     Recalculate the rules of experiments allocation base on new data
+     Check if ROX is disabled.
      
-     
-     - SeeAlso: `ROX.unfreeze()`
-     
-     - Note: Usually called after the user has logged in to refresh ROX custom properties
-     - Note: if a flag has already been used (had impression) is is freezed and the calculation will not change the flag state, to change the flag state you need to unfreeze the flag right after the sync call
-     
+     - Returns: true if ROX is disabled (disabled from the server side).
      */
-
-    public static func sync() {
-        ROXCore.sync()
+    public static func roxDisabled() -> Bool {
+        return ROXCore.roxDisabled()
     }
     
     /**
-     Unfreeze the state of all flags in code
+     Checks if device is a test device.
      
-     When a flag is used in code, his value gets frozen in the app untill the next app foreground event. Calling this function will unfreeze all flags, and using a flag will return it's most updated value
+     Test device are managed by [App Settings](true if device is test device, false otherwise) in the dashboard
      
-     - SeeAlso: [Flags Consistency](https://support.rollout.io/docs/flags-consistency)
+     - SeeAlso: [App Settings](true if device is test device, false otherwise)
      
+     - Returns: true if device is test device, false otherwise.
      */
-    public static func unfreeze() {
-        ROXCore.unfreeze()
+    public static func isTestDevice() -> Bool {
+        return ROXCore.isTestDevice()
     }
+
+    
 }

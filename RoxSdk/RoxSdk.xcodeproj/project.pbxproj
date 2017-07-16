@@ -12,7 +12,8 @@
 		340E715C1EFAB6CC00A2C48E /* ROXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340E715B1EFAB6CC00A2C48E /* ROXCore.framework */; };
 		340E71651EFABAC500A2C48E /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71601EFABAC500A2C48E /* Register.swift */; };
 		340E71661EFABAC500A2C48E /* ROX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71611EFABAC500A2C48E /* ROX.swift */; };
-		340E71671EFABAC500A2C48E /* RoxConfiguration.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71621EFABAC500A2C48E /* RoxConfiguration.swift */; };
+		340E71671EFABAC500A2C48E /* RoxContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71621EFABAC500A2C48E /* RoxContainer.swift */; };
+		341977C41F178B2900360471 /* ROXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341977C31F178B2900360471 /* ROXCore.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,7 +25,8 @@
 		340E715B1EFAB6CC00A2C48E /* ROXCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = ROXCore.framework; path = Carthage/Build/iOS/ROXCore.framework; sourceTree = "<group>"; };
 		340E71601EFABAC500A2C48E /* Register.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = Register.swift; path = RoxSdk/Register.swift; sourceTree = "<group>"; };
 		340E71611EFABAC500A2C48E /* ROX.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ROX.swift; path = RoxSdk/ROX.swift; sourceTree = "<group>"; };
-		340E71621EFABAC500A2C48E /* RoxConfiguration.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoxConfiguration.swift; path = RoxSdk/RoxConfiguration.swift; sourceTree = "<group>"; };
+		340E71621EFABAC500A2C48E /* RoxContainer.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoxContainer.swift; path = RoxSdk/RoxContainer.swift; sourceTree = "<group>"; };
+		341977C31F178B2900360471 /* ROXCore.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = ROXCore.framework; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -33,6 +35,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				340E715C1EFAB6CC00A2C48E /* ROXCore.framework in Frameworks */,
+				341977C41F178B2900360471 /* ROXCore.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -45,7 +48,7 @@
 				340C4C0C1F1249F9008865EB /* RoxEnumVariant.swift */,
 				340E71601EFABAC500A2C48E /* Register.swift */,
 				340E71611EFABAC500A2C48E /* ROX.swift */,
-				340E71621EFABAC500A2C48E /* RoxConfiguration.swift */,
+				340E71621EFABAC500A2C48E /* RoxContainer.swift */,
 				340E713A1EFAB27000A2C48E /* RoxSdk.h */,
 				340E713B1EFAB27000A2C48E /* Info.plist */,
 				340E71381EFAB27000A2C48E /* Products */,
@@ -64,6 +67,7 @@
 		340E71571EFAB64D00A2C48E /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				341977C31F178B2900360471 /* ROXCore.framework */,
 				340E715B1EFAB6CC00A2C48E /* ROXCore.framework */,
 				340E71581EFAB64D00A2C48E /* ROX.framework */,
 			);
@@ -152,7 +156,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				340E71651EFABAC500A2C48E /* Register.swift in Sources */,
-				340E71671EFABAC500A2C48E /* RoxConfiguration.swift in Sources */,
+				340E71671EFABAC500A2C48E /* RoxContainer.swift in Sources */,
 				340C4C0D1F1249F9008865EB /* RoxEnumVariant.swift in Sources */,
 				340E71661EFABAC500A2C48E /* ROX.swift in Sources */,
 			);
@@ -279,6 +283,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RoxSdk/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
@@ -309,6 +314,7 @@
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)/Carthage/Build/iOS",
+					"$(PROJECT_DIR)",
 				);
 				INFOPLIST_FILE = RoxSdk/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
