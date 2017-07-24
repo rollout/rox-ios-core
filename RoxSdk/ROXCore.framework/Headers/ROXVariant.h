@@ -23,5 +23,6 @@
 - (instancetype)initWithDefault:(NSString*)defaultValue options:(NSArray<NSString*>*)options;
 - (NSString*)value;
 - (NSString*)defaultValue;
+- (void)forceValue:(NSString*)value;
 
 @end

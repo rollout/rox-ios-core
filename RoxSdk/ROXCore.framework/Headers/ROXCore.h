@@ -1,7 +1,7 @@
 //
-//  ROX SDK version 1.0.4, Build 432
+//  ROXCore SDK version 1.0.9, Build 440
 //
-//  Copyright (c) 2014 ROX.io. All rights reserved.
+//  Copyright (c) 2017 rollout.io. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

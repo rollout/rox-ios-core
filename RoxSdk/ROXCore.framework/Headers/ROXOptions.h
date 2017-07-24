@@ -66,6 +66,10 @@ typedef enum ROXOptionsVerboseLevel{
  */
 @property (nonatomic) ROXOptionsVerboseLevel verbose;
 /**
+ Setting this options to YES will prevent the SDK from handling and reporting crashed sessions.
+ */
+@property (nonatomic) BOOL disableCrashReporting;
+/**
  :nodoc:
  */
 @property (nonatomic, strong) NSArray * _Nullable silentFiles;

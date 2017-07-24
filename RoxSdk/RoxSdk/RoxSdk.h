@@ -1,9 +1,7 @@
 //
-//  RoxSdk.h
-//  RoxSdk
+//  ROX SDK version 1.0.9, Build 440
 //
-//  Created by Elad Cohen on 6/21/17.
-//  Copyright © 2017 rollout.io. All rights reserved.
+//  Copyright (c) 2017 rollout.io. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>

@@ -42,4 +42,11 @@
 
 - (void)enabled:(void (^)(void))enabledCodeBlock disabled:(void (^)(void))disabledCodeBlock;
 
+/**
+ Force a value on the flag. This will override any other value (Experiment, Flags View Controller, etc..), and can only be overriden with another call to forceValue:
+ 
+ @param value to force the sdk with
+ */
+
+- (void)forceValue:(BOOL)value;
 @end
