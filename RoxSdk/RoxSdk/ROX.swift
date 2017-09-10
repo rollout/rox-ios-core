@@ -105,7 +105,7 @@ public typealias RoxConfigurationBool = ROXConfigurationBool
     
     - Intialize ROX SDK using `ROX.setup(withKey:)`
     - Register container instances using `ROX.register(_:)`
-    - Retrieve container instances using `ROX.get(_:)`
+    - Retrieve container instances using `ROX.getContainer(_:)`
     - Load custom properties with `ROX.setCustomProperty(key:value:)`
     - Present the flags view controller with `ROX.flagsViewController()`
 
@@ -147,7 +147,7 @@ public class ROX {
 
     
     /**
-     Register a container instance to ROX system, the same instance can be retrieved by using `ROX.get(_:)` function
+     Register a container instance to ROX system, the same instance can be retrieved by using `ROX.getContainer(_:)` function
      
      - parameter  container: The instance to register, this instance values are set at `ROX.sync()`, `ROX.setup(withKey:)`, or a if the app goes into foreground
      
@@ -168,7 +168,7 @@ public class ROX {
      - Returns: The instance that was registered
     
      */
-    public static func get<T:RoxContainer>(_ clazz: T.Type) -> T? {
+    public static func getContainer<T:RoxContainer>(_ clazz: T.Type) -> T? {
         let container = store[NSStringFromClass(clazz)]
         
         return container as? T
@@ -381,19 +381,4 @@ public class ROX {
     public static func roxDisabled() -> Bool {
         return ROXCore.roxDisabled()
     }
-    
-    /**
-     Checks if device is a test device.
-     
-     Test device are managed by [App Settings](true if device is test device, false otherwise) in the dashboard
-     
-     - SeeAlso: [App Settings](true if device is test device, false otherwise)
-     
-     - Returns: true if device is test device, false otherwise.
-     */
-    public static func isTestDevice() -> Bool {
-        return ROXCore.isTestDevice()
-    }
-
-    
 }

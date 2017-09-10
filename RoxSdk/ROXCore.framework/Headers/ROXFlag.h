@@ -49,4 +49,12 @@
  */
 
 - (void)forceValue:(BOOL)value;
+
+/**
+ Initialize a flag with a default boolean value
+ 
+ @param defaultValue a default value for this flag
+ */
+
+- (instancetype)initWithDefault:(BOOL)defaultValue;
 @end

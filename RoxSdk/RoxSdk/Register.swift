@@ -21,7 +21,7 @@ class Register {
                 ROXCore.setRemoteVariable(remoteVariable, forKey: rawName)
             }
             else if let variantable = p.value as? ROXVariantableType {
-                ROXCore.setVariant(variantable.variant, forKey: rawName)
+                ROXCore.setVariant(variantable.objcBridge, forKey: rawName)
             }
         }
     }

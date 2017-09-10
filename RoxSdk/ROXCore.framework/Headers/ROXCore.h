@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 1.0.15, Build 448
+//  ROXCore SDK version 1.1.1, Build 450
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -16,7 +16,7 @@
 #import "ROXConfigurationBool.h"
 #import "ROXBaseContainer.h"
 #import "ROXVariant.h"
-
+#import "ROXReportingValue.h"
 
 #define ROX ROXCore
 
@@ -26,7 +26,7 @@
  
     - Intialize ROX SDK using `+setupWithKey:`
     - Register container instances using `+register:`
-    - Retrieve container instances using `+get:`
+    - Retrieve container instances using `+getContainer:`
     - Load custom properties with setCustomPropertyKey:value: methods
     - Present the flags view controller with `+flagsViewController`
 
@@ -56,7 +56,7 @@
 
 +(void)setupWithKey:(NSString *)roxKey options:(ROXOptions *)options;
 /**
- Register a container instance to ROX system, the same instance can be retrieved by using `+get:` function
+ Register a container instance to ROX system, the same instance can be retrieved by using `+getContainer:` function
  
  - @params container The instance to register, this instance values are set at `+sync`, `+setupWithKey:`, or a if the app goes into foreground
  
@@ -77,7 +77,7 @@
  
  */
 
-+(NSObject*) get:(Class)clazz;
++(NSObject*) getContainer:(Class)clazz;
 
 /**
  Recalculate the rules of experiments allocation base on new data
@@ -245,12 +245,6 @@
  */
 +(ROXRemoteVariable*) remoteVariableWithKey:(NSString*)key;
 
-/**
- Check if ROX is disabled.
- 
- @return true if ROX is disabled (disabled from the server side).
- */
-+ (BOOL)isTestDevice;
 /**
  Checks if device is a test device.
  

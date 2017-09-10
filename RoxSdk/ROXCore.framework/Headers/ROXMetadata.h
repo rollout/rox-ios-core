@@ -20,10 +20,6 @@
 @interface ROXMetadata : NSObject
 
 /**
- an array the available flags in this session
- */
-@property (nonatomic, readonly) NSArray<ROXFlag*>* flags;
-/**
  an array the available experiemnts in this session
  */
 
@@ -40,7 +36,7 @@
 /**
  :nodoc:
  */
--(instancetype)initWithFlags:(NSArray<ROXFlag*>*)flags experiments:(NSArray<ROXExperiment*>*)experiments
+-(instancetype)initWithExperiments:(NSArray<ROXExperiment*>*)experiments
                 targetGroups:(NSArray<ROXTargetGroup*>*)targetGroups remoteVariables:(NSArray<ROXRemoteVariable*>*)remoteVariables;
 
 @end

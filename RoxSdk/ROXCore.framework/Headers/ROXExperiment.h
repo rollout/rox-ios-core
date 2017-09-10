@@ -7,6 +7,9 @@
 //
 
 #import <Foundation/Foundation.h>
+
+@class ROXReportingValue;
+
 /**
  This class contains session data about an Experiment
  
@@ -20,16 +23,16 @@
  */
 @property (nonatomic, readonly) NSString* name;
 /**
- Experiment state
- */
-@property (nonatomic, readonly) BOOL isEnabled;
-/**
  Experiment unique indentifier
  */
 @property (nonatomic, readonly) NSString* identifier;
 /**
+ Flags for this experiment
+ */
+@property (nonatomic, readonly) NSArray<ROXReportingValue*>* flags;
+/**
  :nodoc:
  */
--(instancetype)initWithName:(NSString*)name isEnabled:(BOOL)isEnabled identifier:(NSString*)identifier;
+-(instancetype)initWithName:(NSString*)name flags:(NSArray<ROXReportingValue*>*)flags identifier:(NSString*)identifier;
 
 @end

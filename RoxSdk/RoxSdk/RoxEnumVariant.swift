@@ -2,10 +2,10 @@ import Foundation
 import ROXCore
 
 protocol ROXVariantableType {
-    var variant : ROXVariant { get }
+    var objcBridge : ROXVariant { get }
 }
 
-public class RoxEnumVariant<T:RawRepresentable> where T.RawValue == Int {
+public class RoxEnumVariant<T:RawRepresentable> : ROXVariantableType where T.RawValue == Int {
     private let defaultValue: T
     private let values :[String: T]
     fileprivate let rawVariant : ROXVariant
@@ -24,6 +24,7 @@ public class RoxEnumVariant<T:RawRepresentable> where T.RawValue == Int {
             return self.defaultValue
         }
     }
+    
     public var name: String {
         get {
             return self.rawVariant.name
@@ -37,6 +38,7 @@ public class RoxEnumVariant<T:RawRepresentable> where T.RawValue == Int {
         }
         return result
     }
+    
     private static func enumerate() -> AnyIterator<T>{
         var nextIndex = -1
         return AnyIterator {
@@ -44,10 +46,8 @@ public class RoxEnumVariant<T:RawRepresentable> where T.RawValue == Int {
             return T(rawValue:  nextIndex)
         }
     }
-}
-
-extension RoxEnumVariant : ROXVariantableType {
-    var variant : ROXVariant {
+    
+    public var objcBridge : ROXVariant {
         get {
             return self.rawVariant
         }
