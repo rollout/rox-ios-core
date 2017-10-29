@@ -16,7 +16,7 @@ fail() {
 shopt -s nullglob
 
 unset help app_key
-while getopts "p:k:u:h" option; do
+while getopts "p:k:v:h" option; do
   case $option in
     k)
       app_key=$OPTARG
