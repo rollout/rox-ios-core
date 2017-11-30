@@ -25,6 +25,7 @@
  */
 - (_Nonnull instancetype) initWithDefaultValue:(BOOL)defaultValue;
 
+- (_Nonnull instancetype) initWithDefaultValue:(BOOL)defaultValue freeze:(ROXFreeze)freeze;
 
 /**
  The BOOL value, if nothing is configured on ROX dashboard, the default value will be returned

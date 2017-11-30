@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 1.1.4, Build 455
+//  ROXCore SDK version 1.1.6, Build 457
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -17,6 +17,7 @@
 #import "ROXBaseContainer.h"
 #import "ROXVariant.h"
 #import "ROXReportingValue.h"
+#import "ROXFreeze.h"
 
 #define ROX ROXCore
 
@@ -80,18 +81,6 @@
 +(NSObject*) getContainer:(Class)clazz;
 
 /**
- Recalculate the rules of experiments allocation base on new data
- 
- 
- @see `+unfreeze`
- 
- @note Usually called after the user has logged in to refresh ROX custom properties
- @note  if a flag has already been used (had impression) is is freezed and the calculation will not change the flag state, to change the flag state you need to unfreeze the flag right after the sync call
- 
- */
-
-+(void) sync;
-/**
  Unfreeze the state of all flags in code
  
  When a flag is used in code, his value gets frozen in the app untill the next app foreground event. Calling this function will unfreeze all flags, and using a flag will return it's most updated value
@@ -101,6 +90,8 @@
  */
 
 +(void) unfreeze;
+
++(void) unfreezeNamespace:(NSString*)ns;
 
 
 /**

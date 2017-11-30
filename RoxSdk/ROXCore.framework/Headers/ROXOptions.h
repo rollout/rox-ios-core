@@ -6,6 +6,7 @@
 #import <Foundation/Foundation.h>
 #import "ROXProxyInfo.h"
 #import "ROXMetadata.h"
+#import "ROXFreeze.h"
 
 /**
  :nodoc:
@@ -14,7 +15,7 @@ typedef NSString * _Nonnull (^ROXProxy)(ROXProxyInfo* _Nonnull proxyInfo);
 /**
  The Callback definition for `ROXOptions.syncCompletionHandler`
  */
-typedef void (^ROXSyncCompletionHandler)(ROXMetadata* _Nonnull metadata);
+typedef void (^ROXSyncCompletionHandler)();
 
 /**
  The enum to define SDK verbosilty level 
@@ -85,6 +86,8 @@ typedef enum ROXOptionsVerboseLevel{
  :nodoc:
  */
 @property (nonatomic, copy) NSString * _Nullable defaultConfigurationPath;
+
+@property (nonatomic) ROXFreeze defaultFreezeLevel;
 
 @end
 

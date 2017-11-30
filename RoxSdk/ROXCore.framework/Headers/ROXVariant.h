@@ -7,12 +7,12 @@
 //
 
 #import <Foundation/Foundation.h>
+#import "ROXFreeze.h"
 /**
  :nodoc:
  */
 @interface ROXVariant : NSObject
 {
-    NSString* freezeValue;
     NSString* _value;
     BOOL isFreezed;
 }
@@ -21,8 +21,10 @@
 @property (readonly, nonatomic) NSArray<NSString*>* options;
 
 - (instancetype)initWithDefault:(NSString*)defaultValue options:(NSArray<NSString*>*)options;
+- (instancetype)initWithDefault:(NSString*)defaultValue options:(NSArray<NSString*>*)options freeze:(ROXFreeze)freeze;
 - (NSString*)value;
 - (NSString*)defaultValue;
 - (void)forceValue:(NSString*)value;
+- (void)unfreeze;
 
 @end

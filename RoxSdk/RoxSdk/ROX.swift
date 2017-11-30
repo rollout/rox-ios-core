@@ -175,21 +175,6 @@ public class ROX {
     }
     
     /**
-     Recalculate the rules of experiments allocation base on new data
-     
-     
-     - SeeAlso: `ROX.unfreeze()`
-     
-     - Note: Usually called after the user has logged in to refresh ROX custom properties
-     - Note: if a flag has already been used (had impression) is is freezed and the calculation will not change the flag state, to change the flag state you need to unfreeze the flag right after the sync call
-     
-     */
-    
-    public static func sync() {
-        ROXCore.sync()
-    }
-    
-    /**
      Unfreeze the state of all flags in code
      
      When a flag is used in code, his value gets frozen in the app untill the next app foreground event. Calling this function will unfreeze all flags, and using a flag will return it's most updated value

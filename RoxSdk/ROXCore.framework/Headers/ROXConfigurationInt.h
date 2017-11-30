@@ -28,6 +28,8 @@
  */
 - (_Nonnull instancetype) initWithDefaultValue:(int)defaultValue;
 
+- (_Nonnull instancetype) initWithDefaultValue:(int)defaultValue freeze:(ROXFreeze)freeze;
+
 /**
  The int value, if nothing is configured on ROX dashboard, the default value will be returned
  */

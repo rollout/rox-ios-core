@@ -15,6 +15,12 @@ public class RoxEnumVariant<T:RawRepresentable> : ROXVariantableType where T.Raw
         self.rawVariant = ROXVariant(withDefault: String(describing: defaultValue), options: Array(values.keys))
     }
     
+    public init(_ defaultValue:T, freeze: ROXFreeze){
+        self.defaultValue = defaultValue
+        self.values = RoxEnumVariant<T>.allValues(defaultValue)
+        self.rawVariant = ROXVariant(withDefault: String(describing: defaultValue), options: Array(values.keys), freeze: freeze)
+    }
+    
     public var value: T {
         get {
             if let valueFromOptions = self.values[self.rawVariant.value()] {
@@ -51,5 +57,9 @@ public class RoxEnumVariant<T:RawRepresentable> : ROXVariantableType where T.Raw
         get {
             return self.rawVariant
         }
+    }
+    
+    public func unfreeze() {
+        self.rawVariant.unfreeze()
     }
 }

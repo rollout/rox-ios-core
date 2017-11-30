@@ -57,4 +57,7 @@
  */
 
 - (instancetype)initWithDefault:(BOOL)defaultValue;
+
+- (instancetype)initWithDefault:(BOOL)defaultValue freeze:(ROXFreeze)freeze;
+
 @end

@@ -16,4 +16,6 @@
  */
 @property(nonatomic, readonly) NSString *name;
 
+- (void)unfreeze;
+
 @end
