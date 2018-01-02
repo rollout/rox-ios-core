@@ -26,5 +26,6 @@
 - (NSString*)defaultValue;
 - (void)forceValue:(NSString*)value;
 - (void)unfreeze;
+- (NSString*)peek;
 
 @end

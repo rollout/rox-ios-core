@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ROXCore"
-  s.version      = "1.1.6"
+  s.version      = "2.0.0"
   s.summary      = "Continuous Feature Rollouts for Mobile"
   s.description  = "Release mobile features quickly and safely with fully controlled rollouts, measure impact, and react as needed without waiting for your next code release."
 
@@ -20,7 +20,7 @@ Pod::Spec.new do |s|
   s.ios.vendored_frameworks = 'RoxSdk/ROXCore.framework'
   s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited)' }
 
-  s.source       = { :git => "https://github.com/rollout/rox-ios-core.git", :tag => "1.1.6" }
+  s.source       = { :git => "https://github.com/rollout/rox-ios-core.git", :tag => "2.0.0" }
   s.preserve_paths = "lib/**/*", "install/**/*"
 
   s.ios.deployment_target  = '8.0'

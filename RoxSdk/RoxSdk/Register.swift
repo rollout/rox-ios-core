@@ -2,16 +2,10 @@ import Foundation
 import ROXCore
 
 class Register {
-    static func handleContainer(reflecting: RoxContainer){
-        var objcNamespace : String? = nil
-        if let objcContainer = reflecting as? NSObject {
-            ROXCore.registerClass(objcContainer)
-            objcNamespace = NSStringFromClass(type(of: objcContainer))
-        }
-        
-        let props = Mirror(reflecting: reflecting).children
+    static func handleContainer(namespace: String, container: RoxContainer) {
+        ROXCore.handleNamespace(namespace)
+        let props = Mirror(reflecting: container).children
         for p in props.flatMap({ $0 }) {
-            let namespace = reflecting.namespace ?? objcNamespace ?? String(describing: reflecting)
             let rawName = namespace == "" ? p.label! : "\(namespace).\(p.label!)"
 
             if let flag = p.value as? ROXVariant {

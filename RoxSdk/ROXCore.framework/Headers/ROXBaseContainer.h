@@ -19,9 +19,4 @@
 
 @interface ROXBaseContainer : NSObject
 
-/**
- Override this property to override the default namespace of a class
- */
-- (NSString*)namespace;
-
 @end

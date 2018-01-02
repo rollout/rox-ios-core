@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 1.1.6, Build 457
+//  ROXCore SDK version 2.0.0, Build 460
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -8,16 +8,16 @@
 #import <Foundation/Foundation.h>
 #import "ROXOptions.h"
 #import "ROXFlag.h"
-#import "ROXTargetGroup.h"
-#import "ROXExperiment.h"
 #import "ROXConfigurationString.h"
 #import "ROXConfigurationInt.h"
 #import "ROXConfigurationDouble.h"
 #import "ROXConfigurationBool.h"
 #import "ROXBaseContainer.h"
 #import "ROXVariant.h"
-#import "ROXReportingValue.h"
 #import "ROXFreeze.h"
+#import "ROXFetcherResult.h"
+#import "ROXReportingValue.h"
+#import "ROXExperiment.h"
 
 #define ROX ROXCore
 
@@ -27,13 +27,13 @@
  
     - Intialize ROX SDK using `+setupWithKey:`
     - Register container instances using `+register:`
-    - Retrieve container instances using `+getContainer:`
     - Load custom properties with setCustomPropertyKey:value: methods
     - Present the flags view controller with `+flagsViewController`
 
  
  */
 @interface ROXCore : NSObject
+
 /**
  Loads the SDK, usually called as part of `-[AppDelegate application:didFinishLaunchingWithOptions:]`
  
@@ -44,6 +44,7 @@
  @param roxKey The app key (taken from ROX dashboard)
  */
 +(void)setupWithKey:(NSString *)roxKey;
+
 /**
  Loads the SDK, usually called as part of `-[AppDelegate application:didFinishLaunchingWithOptions:]`
  
@@ -54,31 +55,17 @@
  @param roxKey The app key (taken from ROX dashboard)
  @param options setup options
  */
-
 +(void)setupWithKey:(NSString *)roxKey options:(ROXOptions *)options;
-/**
- Register a container instance to ROX system, the same instance can be retrieved by using `+getContainer:` function
- 
- - @params container The instance to register, this instance values are set at `+sync`, `+setupWithKey:`, or a if the app goes into foreground
- 
- - @note this method should be called **only once** for a given class
- 
- */
-+(void) register:(ROXBaseContainer *)container;
-/**
- :nodoc:
- */
-+(void) registerClass:(NSObject*)container;
 
 /**
- Retrieve an instance from type clazz that was registered with `ROX.register(_:)`
- 
- @param  clazz The type of instance you want to retrieve
- @return The instance that was registered
- 
+ Register a container instance to ROX system.
+ - @param namespace The namespace to to register the container with (all flags / configuration will be prefixed with the namespace).
+ - @param container The instance to register, this instance values are fetched at `+setupWithKey:`, or when the app goes into foreground.
+ - @note This method should be called **only once** for a given namespace.
  */
++(void) register:(NSString *)namespace container:(ROXBaseContainer *)container;
 
-+(NSObject*) getContainer:(Class)clazz;
++(void) handleNamespace:(NSString *)namespace;
 
 /**
  Unfreeze the state of all flags in code
@@ -88,11 +75,8 @@
  @see [Flags Consistency](https://support.rollout.io/docs/flags-consistency)
  
  */
-
 +(void) unfreeze;
-
 +(void) unfreezeNamespace:(NSString*)ns;
-
 
 /**
  A view to control feature flags values locally on a mobile device or simulator.
@@ -102,12 +86,9 @@
  @see [How to setup flagsviewController](https://support.rollout.io/docs/flags-override-view)
  
  @return ViewController which shows the local feature flags and provides an interface to turn them on or off.
- 
- 
  */
 + (UIViewController*)flagsViewController;
 
-
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -117,8 +98,8 @@
  @param value The value of the custom property
  
  */
-
 +(void) setCustomStringProperty:(NSString*)value forKey:(NSString*)key;
+
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -128,8 +109,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-
-+(void) setCustomComputedStringProperty:(NSString* (^)())block forKey:(NSString*)key;
++(void) setCustomComputedStringProperty:(NSString* (^)(NSString*))block forKey:(NSString*)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -140,8 +120,8 @@
  @param value The value of the custom property
  
  */
-
 +(void) setCustomBooleanProperty:(BOOL)value forKey:(NSString*)key;
+
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -151,7 +131,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedBooleanProperty:(BOOL (^)())block forKey:(NSString*)key;
++(void) setCustomComputedBooleanProperty:(BOOL (^)(NSString*))block forKey:(NSString*)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -162,8 +142,8 @@
  @param value The value of the custom property
  
  */
-
 +(void) setCustomIntProperty:(int)value forKey:(NSString*)key;
+
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -173,7 +153,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedIntProperty:(int (^)())block forKey:(NSString*)key;
++(void) setCustomComputedIntProperty:(int (^)(NSString*))block forKey:(NSString*)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -184,8 +164,8 @@
  @param value The value of the custom property
  
  */
-
 +(void) setCustomDoubleProperty:(double)value forKey:(NSString*)key;
+
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -195,7 +175,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedDoubleProperty:(double (^)())block forKey:(NSString*)key;
++(void) setCustomComputedDoubleProperty:(double (^)(NSString*))block forKey:(NSString*)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -206,8 +186,8 @@
  @param value The value of the custom property
  
  */
-
 +(void) setCustomSemverProperty:(NSString*)value forKey:(NSString*)key;
+
 /**
  Sets a custom property value that can be used when creating target groups.
  
@@ -217,7 +197,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedSemverProperty:(NSString* (^)())block forKey:(NSString*)key;
++(void) setCustomComputedSemverProperty:(NSString* (^)(NSString*))block forKey:(NSString*)key;
 
 /**
  :nodoc:

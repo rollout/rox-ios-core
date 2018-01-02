@@ -4,7 +4,7 @@ export PATH=/usr/bin:/bin:"$PATH"
 export LC_ALL=UTF-8
 
 ERROR_noAppKeyProvided=(2 "Please specify the app key (use the -k switch)")
-ERROR_noApiVersionProvided=(2 "Please specify the api version (use the -v switch)")
+ERROR_noSdkVersionProvided=(2 "Please specify the sdk version (use the -v switch)")
 ERROR_illegalOption=(3 "Please use -h for help")
 
 fail() {
@@ -14,21 +14,16 @@ fail() {
 }
 
 fetch(){
-  local query_params="app_key=${app_key}&api_version=${api_version}"
-  local fetch_url="https://$base_url/build/fetch_configuration"
+  local query_params="app_key=${app_key}&sdk_version=${sdk_version}&platform=iOS"
+  local fetch_url="https://$base_url/device/embedded_configuration"
   local curl_command="curl -sf"
   $curl_command "$fetch_url?$query_params"
 }
 
-# BIN_DIR="$(cd "$(dirname "$0")" && pwd )"
-# BASE_DIR="$(dirname "$BIN_DIR")"
-# PROJECT_DIR="${BASE_DIR}/../.."
-# rollout_build=`(. "$BIN_DIR"/../lib/versions; echo $build)`
-
 shopt -s nullglob
 
-unset help exit app_key base_url api_version
-base_url="app.rollout.io"
+unset help exit app_key base_url sdk_version
+base_url="x-api.rollout.io"
 
 while getopts "p:k:v:u:h" option; do
   case $option in
@@ -36,7 +31,7 @@ while getopts "p:k:v:u:h" option; do
       app_key=$OPTARG
       ;;
     v)
-      api_version=$OPTARG
+      sdk_version=$OPTARG
       ;;
     u)
       base_url=$OPTARG
@@ -56,7 +51,7 @@ Usage:
 $0 <options>
 
   -k <app key>           ROX app key (required)
-  -v <api version>       ROX api version (required)
+  -v <sdk version>       ROX sdk version (required)
   -h                     this help message
 EOF
   exit
@@ -65,7 +60,7 @@ EOF
 [ -z "$exit" ] || fail ERROR_illegalOption
 
 [ -n "$app_key" ] || fail ERROR_noAppKeyProvided
-[ -n "$api_version" ] || fail ERROR_noApiVersionProvided
+[ -n "$sdk_version" ] || fail ERROR_noSdkVersionProvided
 
 fetch
 
