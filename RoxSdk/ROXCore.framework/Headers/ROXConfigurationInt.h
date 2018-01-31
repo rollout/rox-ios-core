@@ -14,7 +14,7 @@
  */
 @interface ROXConfigurationInt : ROXRemoteVariable
 
-
+NS_ASSUME_NONNULL_BEGIN
 /**
  :nodoc:
  */
@@ -34,6 +34,6 @@
  The int value, if nothing is configured on ROX dashboard, the default value will be returned
  */
 @property (nonatomic, readonly) int value;
-
+NS_ASSUME_NONNULL_END
 @end
 

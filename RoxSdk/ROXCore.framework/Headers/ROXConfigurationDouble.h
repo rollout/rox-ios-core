@@ -12,10 +12,9 @@
 /**
  This class is the API for a remote configuration Double that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
  */
-
 @interface ROXConfigurationDouble : ROXRemoteVariable
 
-
+NS_ASSUME_NONNULL_BEGIN
 /**
  :nodoc:
  */
@@ -34,5 +33,5 @@
  The double value, if nothing is configured on ROX dashboard, the default value will be returned
  */
 @property (nonatomic, readonly) double value;
-
+NS_ASSUME_NONNULL_END
 @end

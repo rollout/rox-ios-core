@@ -1,5 +1,34 @@
 import Foundation
 import ROXCore
+
+
+/**
+ This class is the API for options that can be send in setup to control SDK options.
+ 
+ 
+ - SeeAlso: [ROXOptions](../objc/Classes/ROXOptions.html)
+ 
+ 
+ ```swift ???
+ open class ROXOptions : NSObject {
+ 
+    ROXConfigurationFetchedHandler onConfigurationFetched;
+    ROXImpressionHandler impressionHandler;
+    ROXOptionsVerboseLevel verbose;
+ 
+ }
+ 
+ ```
+ 
+ 
+ */
+public typealias RoxOptions = ROXOptions
+public typealias RoxOptionsVerboseLevel = ROXOptionsVerboseLevel
+public typealias RoxExperiment = ROXExperiment
+public typealias RoxReportingValue = ROXReportingValue
+public typealias RoxFetcherResult = ROXFetcherResult
+public typealias RoxFreeze = ROXFreeze
+
 /**
  This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
  
@@ -430,5 +459,9 @@ public class ROX {
      */
     public static func roxDisabled() -> Bool {
         return ROXCore.roxDisabled()
+    }
+    
+    public static func fetch() -> Void {
+        return ROXCore.fetch()
     }
 }

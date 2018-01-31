@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 2.0.0, Build 460
+//  ROXCore SDK version 2.0.1, Build 474
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -227,6 +227,10 @@
  */
 
 +(BOOL)roxDisabled;
+/**
+ :nodoc:
+ */
++(void)fetch;
 
 #ifdef DEBUG
 void resetROXDispatchOnce(void);

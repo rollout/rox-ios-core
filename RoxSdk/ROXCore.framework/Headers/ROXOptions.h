@@ -22,12 +22,12 @@ typedef void (^ROXImpressionHandler)(ROXReportingValue* _Nonnull value, ROXExper
  The enum to define SDK verbosilty level 
  @see `ROXOptions.verbose`
  */
-typedef enum ROXOptionsVerboseLevel{
+typedef NS_ENUM (NSUInteger, ROXOptionsVerboseLevel){
     ///Silent log
     ROXOptionsVerboseLevelSilent,
     ///Verbsoe log
     ROXOptionsVerboseLevelDebug
-} /** :nodoc: */ ROXOptionsVerboseLevel;
+} /** :nodoc: */;
 
 /**
  This is the configuration class that is used when running `+[ROXCore setupWithKey:options:]`.
