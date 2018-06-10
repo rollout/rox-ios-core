@@ -6,15 +6,14 @@
 //  Copyright © 2017 DeDoCo. All rights reserved.
 //
 
-#import <ROXCore/ROXCore.h>
 #import "ROXRemoteVariable.h"
-
+#import "ROXFreeze.h"
 /**
  This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
  */
 
 @interface ROXConfigurationString : ROXRemoteVariable
-
+NS_ASSUME_NONNULL_BEGIN
 /**
  :nodoc:
  */
@@ -36,6 +35,6 @@
  */
 
 @property (nonatomic, readonly, nonnull) NSString* value;
-
+NS_ASSUME_NONNULL_END
 
 @end

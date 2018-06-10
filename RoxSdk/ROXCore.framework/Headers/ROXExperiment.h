@@ -13,7 +13,8 @@
 
 @property (nonatomic, readonly) NSString* name;
 @property (nonatomic, readonly) NSString* identifier;
+@property (nonatomic, readonly) BOOL isArchived;
 
--(instancetype)initWithName:(NSString*)name identifier:(NSString*)identifier;
+-(instancetype)initWithName:(NSString*)name identifier:(NSString*)identifier isArchived:(BOOL) isArchived;
 
 @end

@@ -16,12 +16,15 @@
     NSString* _value;
     BOOL isFreezed;
 }
-
+NS_ASSUME_NONNULL_BEGIN
 @property (readonly, nonatomic) NSString* name;
 @property (readonly, nonatomic) NSArray<NSString*>* options;
 
+
 - (instancetype)initWithDefault:(NSString*)defaultValue options:(NSArray<NSString*>*)options;
 - (instancetype)initWithDefault:(NSString*)defaultValue options:(NSArray<NSString*>*)options freeze:(ROXFreeze)freeze;
+
+
 - (NSString*)value;
 - (NSString*)defaultValue;
 - (void)forceValue:(NSString*)value;
@@ -29,3 +32,4 @@
 - (NSString*)peek;
 
 @end
+NS_ASSUME_NONNULL_END

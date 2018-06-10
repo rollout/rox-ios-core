@@ -5,6 +5,8 @@ export LC_ALL=UTF-8
 
 ERROR_noAppKeyProvided=(2 "Please specify the app key (use the -k switch)")
 ERROR_noSdkVersionProvided=(2 "Please specify the sdk version (use the -v switch)")
+ERROR_noApiVersionProvided=(2 "Please specify the api version (use the -a switch)")
+ERROR_noPlatformProvided=(2 "Please specify the platform (use the -t switch)")
 ERROR_illegalOption=(3 "Please use -h for help")
 
 fail() {
@@ -14,7 +16,7 @@ fail() {
 }
 
 fetch(){
-  local query_params="app_key=${app_key}&sdk_version=${sdk_version}&platform=iOS"
+  local query_params="api_version=${api_version}&app_key=${app_key}&sdk_version=${sdk_version}&platform=$platform"
   local fetch_url="https://$base_url/device/embedded_configuration"
   local curl_command="curl -sf"
   $curl_command "$fetch_url?$query_params"
@@ -22,11 +24,14 @@ fetch(){
 
 shopt -s nullglob
 
-unset help exit app_key base_url sdk_version
+unset help exit app_key base_url sdk_version api_version platform
 base_url="x-api.rollout.io"
 
-while getopts "p:k:v:u:h" option; do
+while getopts "t:a:p:k:v:u:h" option; do
   case $option in
+    t)
+      platform=$OPTARG
+      ;;
     k)
       app_key=$OPTARG
       ;;
@@ -35,6 +40,9 @@ while getopts "p:k:v:u:h" option; do
       ;;
     u)
       base_url=$OPTARG
+      ;;
+    a)
+      api_version=$OPTARG
       ;;
     h)
       help=1
@@ -52,6 +60,8 @@ $0 <options>
 
   -k <app key>           ROX app key (required)
   -v <sdk version>       ROX sdk version (required)
+  -a <api_version>	 ROX api version (required)
+  -t <platform>	         ROX platform (required)
   -h                     this help message
 EOF
   exit
@@ -61,6 +71,8 @@ EOF
 
 [ -n "$app_key" ] || fail ERROR_noAppKeyProvided
 [ -n "$sdk_version" ] || fail ERROR_noSdkVersionProvided
+[ -n "$api_version" ] || fail ERROR_noApiVersionProvided
+[ -n "$platform" ] || fail ERROR_noPlatformProvided
 
 fetch
 
