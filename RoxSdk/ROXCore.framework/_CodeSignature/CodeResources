@@ -30,7 +30,7 @@
 		</data>
 		<key>Headers/ROXExperiment.h</key>
 		<data>
-		SgJ0X1WsEG2cywQORGu9x89H9oQ=
+		tJ2s6neMl5mgSEdLPh2AiKFhiEU=
 		</data>
 		<key>Headers/ROXFetcherResult.h</key>
 		<data>
@@ -54,7 +54,7 @@
 		</data>
 		<key>Headers/ROXProxyInfo.h</key>
 		<data>
-		a+2axGth6rW5hdhYrYmO0bbBH5g=
+		QdkwRZdRunR/rW5lqfveci8NVAk=
 		</data>
 		<key>Headers/ROXRemoteVariable.h</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		x8do8YJ60M2J7NXoTP3QfSe+Qto=
+		/9nOY9DpQK6c+MqLERxES0Pik8w=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -149,11 +149,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			SgJ0X1WsEG2cywQORGu9x89H9oQ=
+			tJ2s6neMl5mgSEdLPh2AiKFhiEU=
 			</data>
 			<key>hash2</key>
 			<data>
-			zjQutbYOEjaJ3/OvCgZCmbA937//MoMaPwcfbHFckPs=
+			JhbHuO3Qk081qaZGcYqY/4CURQpMBCGGg+o8esyh3dM=
 			</data>
 		</dict>
 		<key>Headers/ROXFetcherResult.h</key>
@@ -215,11 +215,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			a+2axGth6rW5hdhYrYmO0bbBH5g=
+			QdkwRZdRunR/rW5lqfveci8NVAk=
 			</data>
 			<key>hash2</key>
 			<data>
-			VLAudezjI7wfYbAqPqMzX+g6sOPChmarQVtDvFhe//E=
+			T9sdp2xtVb+He4pnycs6xLUOMGZxBXtDIYF+r6TvCmk=
 			</data>
 		</dict>
 		<key>Headers/ROXRemoteVariable.h</key>

@@ -11,9 +11,9 @@
 @interface ROXProxyInfo : NSObject
 
 @property (readonly) NSString *originalURL;
-@property (readonly) NSString *staticPrefix;
-@property (readonly) NSString *dynamicPart;
+@property (readonly) NSString *buid;
+@property (readonly) NSString *distinctId;
 
-- (instancetype)initWithOriginalURL:(NSString *)originalURL staticPrefix:(NSString *)staticPrefix dynamicPart:(NSString *)dynamicPart;
+- (instancetype)initWithOriginalURL:(NSString *)originalURL buid:(NSString *)buid distinctId:(NSString *)distinctId;
 
 @end
