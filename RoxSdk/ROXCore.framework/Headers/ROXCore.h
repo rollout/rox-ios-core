@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 4.1.0, Build 485
+//  ROXCore SDK version 4.2.0, Build 487
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
