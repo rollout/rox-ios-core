@@ -9,11 +9,12 @@
 #import <Foundation/Foundation.h>
 #import "ROXVariant.h"
 
+@protocol ROXDeviceProperties;
 @class ROXFeatureFlagsSetter;
 
 @interface ROXFlagsOverrides : NSObject
 
-- (instancetype)initWithFlagSetter:(ROXFeatureFlagsSetter*)setter;
+- (instancetype)initWithFlagSetter:(ROXFeatureFlagsSetter*)setter deviceProperties:(id<ROXDeviceProperties>)deviceProperties;
 
 - (BOOL)hasOverride:(NSString*)featureName;
 - (NSString*)overrideForName:(NSString*)featureName;
