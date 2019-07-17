@@ -451,16 +451,7 @@ public class ROX {
     public static func setCustomProperty(key: String, value: @escaping () -> Double) {
         return self.setCustomProperty(key:key, value: {(_ : String?) -> Double in value() })
     }
-    
-    /**
-     Check if ROX is disabled.
-     
-     - Returns: true if ROX is disabled (disabled from the server side).
-     */
-    public static func roxDisabled() -> Bool {
-        return ROXCore.roxDisabled()
-    }
-    
+        
     public static func fetch() -> Void {
         return ROXCore.fetch()
     }

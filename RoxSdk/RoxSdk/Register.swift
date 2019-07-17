@@ -5,7 +5,7 @@ class Register {
     static func handleContainer(namespace: String, container: RoxContainer) {
         ROXCore.handleNamespace(namespace)
         let props = Mirror(reflecting: container).children
-        for p in props.flatMap({ $0 }) {
+        for p in props.compactMap({ $0 }) {
             let rawName = namespace == "" ? p.label! : "\(namespace).\(p.label!)"
 
             if let flag = p.value as? ROXVariant {

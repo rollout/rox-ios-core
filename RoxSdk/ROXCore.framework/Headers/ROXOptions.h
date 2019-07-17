@@ -51,17 +51,9 @@ typedef NS_ENUM (NSUInteger, ROXOptionsVerboseLevel){
  */
 @property (nonatomic) ROXOptionsVerboseLevel verbose;
 /**
- Setting this options to YES will prevent the SDK from handling and reporting crashed sessions.
- */
-@property (nonatomic) BOOL disableCrashReporting;
-/**
  :nodoc:
  */
 @property (nonatomic, strong) NSArray * _Nullable silentFiles;
-/**
- :nodoc:
- */
-@property (nonatomic) BOOL roxDisabled;
 /**
  :nodoc:
  */

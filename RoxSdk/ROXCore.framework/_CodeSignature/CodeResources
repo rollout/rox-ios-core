@@ -26,7 +26,7 @@
 		</data>
 		<key>Headers/ROXCore.h</key>
 		<data>
-		+9vRVrUAP+wdsZLYUibLf+EDHbU=
+		AIXn3gck1zJ3QIol4WPH8usU7bk=
 		</data>
 		<key>Headers/ROXExperiment.h</key>
 		<data>
@@ -50,7 +50,7 @@
 		</data>
 		<key>Headers/ROXOptions.h</key>
 		<data>
-		7MsTb5ySwx9yRCw+kIkrTTj8xqg=
+		L9Z9aQb72LXzmKH19GRuULYFzgI=
 		</data>
 		<key>Headers/ROXProxyInfo.h</key>
 		<data>
@@ -70,7 +70,7 @@
 		</data>
 		<key>Info.plist</key>
 		<data>
-		XdLnCtn5tb7MmqOd05jlHAmdmWs=
+		P6lLDMzJDksw6Jz1Ft8x/gFoAaU=
 		</data>
 		<key>Modules/module.modulemap</key>
 		<data>
@@ -138,11 +138,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			+9vRVrUAP+wdsZLYUibLf+EDHbU=
+			AIXn3gck1zJ3QIol4WPH8usU7bk=
 			</data>
 			<key>hash2</key>
 			<data>
-			DAu/9Dg8Tie4tNAyp2NUJitSli241d0m0uOgurYKBGM=
+			aB4PMl+Ox6/R+DBIdEAFRzBYpNWSDHgBrqjaMyGd2po=
 			</data>
 		</dict>
 		<key>Headers/ROXExperiment.h</key>
@@ -204,11 +204,11 @@
 		<dict>
 			<key>hash</key>
 			<data>
-			7MsTb5ySwx9yRCw+kIkrTTj8xqg=
+			L9Z9aQb72LXzmKH19GRuULYFzgI=
 			</data>
 			<key>hash2</key>
 			<data>
-			XZK1jyWNm9Xqbr+OweEntvE8YRNCj6SttFdsVwN5gqo=
+			AQTZMbrhfkNXPxWx/28pSnU1YzhGYolmlG+dmYHdVNs=
 			</data>
 		</dict>
 		<key>Headers/ROXProxyInfo.h</key>

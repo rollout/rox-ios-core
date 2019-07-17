@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 4.4.0, Build 491
+//  ROXCore SDK version 4.7.0, Build 497
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -217,17 +217,6 @@
  */
 +(ROXRemoteVariable*) remoteVariableWithKey:(NSString*)key;
 
-/**
- Checks if device is a test device.
- 
- Test device are managed by [App Settings](true if device is test device, false otherwise) in the dashboard
- 
- @see [App Settings](true if device is test device, false otherwise)
- 
- @return true if device is test device, false otherwise.
- */
-
-+(BOOL)roxDisabled;
 /**
  :nodoc:
  */
