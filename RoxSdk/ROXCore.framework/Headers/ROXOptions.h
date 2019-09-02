@@ -4,7 +4,6 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ROXProxyInfo.h"
 #import "ROXFreeze.h"
 #import "ROXFetcherResult.h"
 #import "ROXReportingValue.h"
@@ -13,7 +12,6 @@
 /**
  :nodoc:
  */
-typedef NSString * _Nonnull (^ROXProxy)(ROXProxyInfo* _Nonnull proxyInfo);
 
 typedef void (^ROXConfigurationFetchedHandler)(ROXFetcherResult* _Nonnull result);
 typedef void (^ROXImpressionHandler)(ROXReportingValue* _Nonnull value, ROXExperiment* _Nullable experiment);
@@ -37,8 +35,6 @@ typedef NS_ENUM (NSUInteger, ROXOptionsVerboseLevel){
 /**
  :nodoc:
  */
-@property (nonatomic, copy, nullable) ROXProxy proxy;
-
 @property (nonatomic, copy, nullable) ROXConfigurationFetchedHandler onConfigurationFetched;
 
 @property (nonatomic, copy, nullable) ROXImpressionHandler impressionHandler;

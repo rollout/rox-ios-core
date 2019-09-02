@@ -437,7 +437,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7s,
 					"$(ARCHS_STANDARD)",
 				);
 				CLANG_ENABLE_MODULES = YES;
@@ -468,7 +467,6 @@
 			isa = XCBuildConfiguration;
 			buildSettings = {
 				ARCHS = (
-					armv7s,
 					"$(ARCHS_STANDARD)",
 				);
 				CLANG_ENABLE_MODULES = YES;
