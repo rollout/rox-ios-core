@@ -8,6 +8,7 @@
 #import "ROXFetcherResult.h"
 #import "ROXReportingValue.h"
 #import "ROXExperiment.h"
+#import "ROXSelfManagedOptions.h"
 
 /**
  :nodoc:
@@ -60,6 +61,8 @@ typedef NS_ENUM (NSUInteger, ROXOptionsVerboseLevel){
 @property (nonatomic, copy) NSString * _Nullable defaultConfigurationPath;
 
 @property (nonatomic) ROXFreeze defaultFreezeLevel;
+
+@property (nonatomic, copy, nullable) ROXSelfManagedOptions* selfManaged;
 
 @end
 

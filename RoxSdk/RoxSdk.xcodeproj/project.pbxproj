@@ -236,7 +236,7 @@
 					};
 					347941601FF54F51000BA731 = {
 						CreatedOnToolsVersion = 9.2;
-						DevelopmentTeam = GR2VMYMWQL;
+						DevelopmentTeam = R5762AJ3XZ;
 						ProvisioningStyle = Automatic;
 					};
 					347941681FF54F52000BA731 = {
@@ -436,9 +436,7 @@
 		340E71401EFAB27000A2C48E /* Debug */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -466,9 +464,7 @@
 		340E71411EFAB27000A2C48E /* Release */ = {
 			isa = XCBuildConfiguration;
 			buildSettings = {
-				ARCHS = (
-					"$(ARCHS_STANDARD)",
-				);
+				ARCHS = "$(ARCHS_STANDARD)";
 				CLANG_ENABLE_MODULES = YES;
 				CODE_SIGN_IDENTITY = "";
 				DEFINES_MODULE = YES;
@@ -506,7 +502,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = GR2VMYMWQL;
+				DEVELOPMENT_TEAM = R5762AJ3XZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
@@ -543,7 +539,7 @@
 				CODE_SIGN_IDENTITY = "";
 				CODE_SIGN_STYLE = Automatic;
 				DEFINES_MODULE = YES;
-				DEVELOPMENT_TEAM = GR2VMYMWQL;
+				DEVELOPMENT_TEAM = R5762AJ3XZ;
 				DYLIB_COMPATIBILITY_VERSION = 1;
 				DYLIB_CURRENT_VERSION = 1;
 				DYLIB_INSTALL_NAME_BASE = "@rpath";

@@ -22,6 +22,7 @@ import ROXCore
  
  
  */
+public typealias RoxSelfManagedOptions = ROXSelfManagedOptions
 public typealias RoxOptions = ROXOptions
 public typealias RoxOptionsVerboseLevel = ROXOptionsVerboseLevel
 public typealias RoxExperiment = ROXExperiment
