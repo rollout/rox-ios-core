@@ -22,7 +22,7 @@ Pod::Spec.new do |s|
 
   s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited)' }
 
-  s.source       = { :git => "git@github.com:rollout/rox-ios-core.git", :tag => "4.9.1" }
+  s.source       = { :git => "https://github.com/rollout/rox-ios-core.git", :tag => "4.9.1" }
   s.preserve_paths = "lib/**/*", "install/**/*"
 
   s.ios.deployment_target  = '8.0'
