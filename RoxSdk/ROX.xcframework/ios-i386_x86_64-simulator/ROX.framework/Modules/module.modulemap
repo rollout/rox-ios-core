@@ -1,0 +1,4 @@
+framework module ROX {
+  header "ROX-Swift.h"
+  requires objc
+}

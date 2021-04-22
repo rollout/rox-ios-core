@@ -1,0 +1,7 @@
+framework module ROXCore {
+    umbrella header "ROXCoreOnTV.h"
+    
+    export *
+    module * { export * }
+}
+

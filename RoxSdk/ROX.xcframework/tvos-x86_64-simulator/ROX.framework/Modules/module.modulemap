@@ -1,0 +1,11 @@
+framework module ROX {
+  umbrella header "ROX.h"
+
+  export *
+  module * { export * }
+}
+
+module ROX.Swift {
+    header "ROX-Swift.h"
+    requires objc
+}
