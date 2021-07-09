@@ -30,6 +30,7 @@ let package = Package(
       path: "RoxSdk/RoxSdk",
       exclude: [
         "Info.plist",
+        "RoxSdk.h"
       ])
   ]
 )
