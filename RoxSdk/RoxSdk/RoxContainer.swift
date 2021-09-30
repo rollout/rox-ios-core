@@ -11,18 +11,6 @@ import Foundation
      public class MyContainer : RoxContainer {
         //group support feature flag
         let groupSupport = RoxFlag()
- 
-        // String configuration defaulted to "Hello World"
-        let message = RoxConfigurationString(defaultValue: "Hello World")
-        
-        // Bool configuration default to true
-        let shouldShowBadge = RoxConfigurationBool(defaultValue: true)
-        
-        // Int configuration default to 100
-        let popupTimeout = RoxConfigurationInt(defaultValue: 100)
- 
-        // Double configuration default to
-        let ratio = RoxConfigurationDouble(defaultValue: 0.55)
      }
  
     // Register MyContainer class

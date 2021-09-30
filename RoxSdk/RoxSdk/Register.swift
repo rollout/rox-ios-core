@@ -8,13 +8,10 @@ class Register {
         for p in props.compactMap({ $0 }) {
             let rawName = namespace == "" ? p.label! : "\(namespace).\(p.label!)"
 
-            if let flag = p.value as? ROXVariant {
+            if let flag = p.value as? ROXString {
                 ROXCore.setVariant(flag, forKey: rawName)
             }
-            else if let remoteVariable = p.value as? ROXRemoteVariable {
-                ROXCore.setRemoteVariable(remoteVariable, forKey: rawName)
-            }
-            else if let variantable = p.value as? ROXVariantableType {
+            else if let variantable = p.value as? ROXStringableType {
                 ROXCore.setVariant(variantable.objcBridge, forKey: rawName)
             }
         }

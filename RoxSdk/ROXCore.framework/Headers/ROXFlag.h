@@ -7,19 +7,20 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ROXVariant.h"
-
+#import "ROXString.h"
 
 /**
  This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
  */
 
-@interface ROXFlag : ROXVariant
+@interface ROXFlag : ROXString
 NS_ASSUME_NONNULL_BEGIN
 /**
  a property to indicate if the flag is enabled or disabled
  */
 @property (readonly, nonatomic) BOOL isEnabled;
+
+- (BOOL)isEnabled:(ROXDynamicPropertyContext*)context;
 
 /**
  Runs block is flag is enabled
@@ -28,12 +29,17 @@ NS_ASSUME_NONNULL_BEGIN
  */
 - (void)enabled:(void (^)(void))codeBlock;
 
+- (void)enabled:(void (^)(void))codeBlock context:(ROXDynamicPropertyContext*)context;
+
 /**
  Runs block is flag is disabled
  
  @param codeBlock will get invoked (synchronously) if flag is disabled
  */
 - (void)disabled:(void (^)(void))codeBlock;
+
+- (void)disabled:(void (^)(void))codeBlock context:(ROXDynamicPropertyContext*)context;
+
 /**
  Runs one of the given block based on flag status
  
@@ -42,6 +48,8 @@ NS_ASSUME_NONNULL_BEGIN
  */
 
 - (void)enabled:(void (^)(void))enabledCodeBlock disabled:(void (^)(void))disabledCodeBlock;
+
+- (void)enabled:(void (^)(void))enabledCodeBlock disabled:(void (^)(void))disabledCodeBlock context:(ROXDynamicPropertyContext*)context;
 
 /**
  Force a value on the flag. This will override any other value (Experiment, Flags View Controller, etc..), and can only be overriden with another call to forceValue:

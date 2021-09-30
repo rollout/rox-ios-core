@@ -25,20 +25,42 @@ import ROXCore
 public typealias RoxSelfManagedOptions = ROXSelfManagedOptions
 public typealias RoxOptions = ROXOptions
 public typealias RoxOptionsVerboseLevel = ROXOptionsVerboseLevel
-public typealias RoxExperiment = ROXExperiment
 public typealias RoxReportingValue = ROXReportingValue
 public typealias RoxFetcherResult = ROXFetcherResult
 public typealias RoxFreeze = ROXFreeze
+public typealias RoxExceptionTrigger = ROXExceptionTrigger
+public typealias RoxDynamicPropertyContext = ROXDynamicPropertyContext
 
 /**
- This class is the API for flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
+ This class is the API for string feature flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
+ 
+ 
+ - SeeAlso: [ROXString](../objc/Classes/ROXString.html)
+ 
+ 
+ ```swift
+ open class RoxString {
+ 
+    open var name: String! { get }
+    open var value: String! { get }
+ }
+
+ ```
+
+ 
+*/
+
+public typealias RoxString = ROXString
+
+/**
+ This class is the API for boolean flags that are controlled by ROX server, Flags are assigned to an experiment and their value is based on experiment container.
  
  
  - SeeAlso: [ROXFlag](../objc/Classes/ROXFlag.html)
  
  
  ```swift
- open class ROXFlag : ROXVariant {
+ open class ROXFlag : ROXString {
  
     open var isEnabled: Bool { get }
     open func enabled(_ codeBlock: (() -> Swift.Void)!)
@@ -55,78 +77,46 @@ public typealias RoxFreeze = ROXFreeze
 public typealias RoxFlag = ROXFlag
 
 /**
- This class is the API for a remote configuration String that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
-
+ This class is the API for integer flags that are controlled by ROX server. Flags are assigned to an experiment and their value is based on experiment container.
  
- - SeeAlso: [ROXConfigurationString](../objc/Classes/ROXConfigurationString.html)
-
+ 
+ - SeeAlso: [ROXInt](../objc/Classes/ROXInt.html)
+ 
  
  ```swift
- open class ROXConfigurationString {
+ open class ROXInt : ROXString {
  
-    open var value: String { get }
-    public init(defaultValue: String)
- 
+    open var name: String! { get }
+    open var value: Int { get }
  }
+
  ```
 
- */
+ 
+*/
 
-public typealias RoxConfigurationString = ROXConfigurationString
+public typealias RoxInt = ROXInt
 
 /**
- This class is the API for a remote configuration Int that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
+ This class is the API for floating point type flags that are controlled by ROX server. Flags are assigned to an experiment and their value is based on experiment container.
  
- - SeeAlso: [ROXConfigurationInt](../objc/Classes/ROXConfigurationInt.html)
-
- ```swift
- open class ROXConfigurationInt {
  
- open var value: Int { get }
- public init(defaultValue: Int)
- 
- }
- ```
- 
- */
-public typealias RoxConfigurationInt = ROXConfigurationInt
-/**
- This class is the API for a remote configuration Double that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
- 
- - SeeAlso: [ROXConfigurationDouble](../objc/Classes/ROXConfigurationDouble.html)
+ - SeeAlso: [ROXDouble](../objc/Classes/ROXDouble.html)
  
  
  ```swift
- open class ROXConfigurationDouble {
+ open class ROXDouble : ROXString {
  
- open var value: Double { get }
- public init(defaultValue: Double)
- 
+    open var name: String! { get }
+    open var value: Double { get }
  }
- ```
- 
- 
- */
-public typealias RoxConfigurationDouble = ROXConfigurationDouble
-/**
- This class is the API for a remote configuration Bool that is controlled by ROX server, on init you assing a default value to that string that can be changed by the configuration tab in ROX dashboard
- 
 
- - SeeAlso: [ROXConfigurationBool](../objc/Classes/ROXConfigurationBool.html)
+ ```
 
  
- ```swift
- open class ROXConfigurationBool {
- 
- open var value: Bool { get }
- public init(defaultValue: Bool)
- 
- }
- ```
- 
- 
- */
-public typealias RoxConfigurationBool = ROXConfigurationBool
+*/
+
+public typealias RoxDouble = ROXDouble
 
 
 /**
@@ -168,7 +158,7 @@ public class ROX {
      
      */
     public static func setup(withKey key: String, options: ROXOptions) {
-        ROXCore.setup(withKey: key, options: options)
+        ROXCore.setup(withKey: key, options: options, platformVersion:"Swift", languageVersion:SwiftVersion.getLanguageCompatibilityVersion())
     }
     
 
@@ -183,7 +173,7 @@ public class ROX {
      - Note: This method should be called **only once** for a given namespace.
      
      */
-    public static func register(_ namespace: String, container: RoxContainer) {
+    public static func register(_ namespace: String = "", container: RoxContainer) {
         Register.handleContainer(namespace : namespace, container : container)
     }
     
@@ -260,7 +250,7 @@ public class ROX {
      - Parameter value: a code block to returns the value of the custom property
      
      */
-    public static func setCustomProperty(key: String, value: @escaping (String?) -> String) {
+    public static func setCustomProperty(key: String, value: @escaping (String?, ROXDynamicPropertyContext?) -> String) {
         self.setCustomProperty(key: key, asSemver: false, value: value)
     }
     
@@ -277,7 +267,7 @@ public class ROX {
      
      */
     public static func setCustomProperty(key: String, value: @escaping () -> String) {
-        self.setCustomProperty(key: key, asSemver: false, value: {(_ : String?) -> String in  value() } )
+        self.setCustomProperty(key: key, asSemver: false, value: {(_ : String?, _: ROXDynamicPropertyContext?) -> String in  value() } )
     }
     
     /**
@@ -293,7 +283,7 @@ public class ROX {
      
      */
 
-    public static func setCustomProperty(key: String, asSemver: Bool, value: @escaping (String?) -> String) {
+    public static func setCustomProperty(key: String, asSemver: Bool, value: @escaping (String?, ROXDynamicPropertyContext?) -> String) {
         if (!asSemver) {
             ROXCore.setCustomComputedStringProperty(value, forKey: key)
         }
@@ -316,7 +306,7 @@ public class ROX {
      */
     
     public static func setCustomProperty(key: String, asSemver: Bool, value: @escaping () -> String) {
-        return self.setCustomProperty(key:key, asSemver:asSemver, value:{ (_: String?) -> String in value() })
+        return self.setCustomProperty(key:key, asSemver:asSemver, value:{ (_: String?, _: ROXDynamicPropertyContext?) -> String in value() })
     }
     
     /**
@@ -345,7 +335,7 @@ public class ROX {
      - Parameter value: a code block to returns the value of the custom property
      
      */
-    public static func setCustomProperty(key: String, value: @escaping (String?) -> Bool) {
+    public static func setCustomProperty(key: String, value: @escaping (String?, ROXDynamicPropertyContext?) -> Bool) {
         ROXCore.setCustomComputedBooleanProperty(value, forKey: key)
     }
     
@@ -362,7 +352,7 @@ public class ROX {
      
      */
     public static func setCustomProperty(key: String, value: @escaping () -> Bool) {
-        return self.setCustomProperty(key: key, value: { (_ : String?) -> Bool in value() })
+        return self.setCustomProperty(key: key, value: { (_ : String?, _ : ROXDynamicPropertyContext?) -> Bool in value() })
     }
     /**
      Sets a custom property value that can be used when creating target groups.
@@ -389,7 +379,7 @@ public class ROX {
      - Parameter value: a code block to returns the value of the custom property
      
      */
-    public static func setCustomProperty(key: String, value: @escaping (String?) -> Int32) {
+    public static func setCustomProperty(key: String, value: @escaping (String?, ROXDynamicPropertyContext?) -> Int32) {
         ROXCore.setCustomComputedIntProperty(value, forKey: key)
     }
     
@@ -406,7 +396,7 @@ public class ROX {
      
      */
     public static func setCustomProperty(key: String, value: @escaping () -> Int32) {
-        return self.setCustomProperty(key:key, value: {(_ : String?) -> Int32 in value() });
+        return self.setCustomProperty(key:key, value: {(_ : String?, _: ROXDynamicPropertyContext?) -> Int32 in value() });
     }
     /**
      Sets a custom property value that can be used when creating target groups.
@@ -433,7 +423,7 @@ public class ROX {
      - Parameter value: a code block to returns the value of the custom property
      
      */
-    public static func setCustomProperty(key: String, value: @escaping (String?) -> Double) {
+    public static func setCustomProperty(key: String, value: @escaping (String?, ROXDynamicPropertyContext?) -> Double) {
         ROXCore.setCustomComputedDoubleProperty(value, forKey: key)
     }
     
@@ -450,9 +440,13 @@ public class ROX {
      
      */
     public static func setCustomProperty(key: String, value: @escaping () -> Double) {
-        return self.setCustomProperty(key:key, value: {(_ : String?) -> Double in value() })
+        return self.setCustomProperty(key:key, value: {(_ : String?, _: ROXDynamicPropertyContext?) -> Double in value() })
     }
-        
+    
+    public static func setGlobalContext(context: ROXDynamicPropertyContext) {
+        return ROXCore.setGlobalDynamicPropertyContext(context);
+    }
+    
     public static func fetch() -> Void {
         return ROXCore.fetch()
     }
@@ -461,7 +455,15 @@ public class ROX {
         return ROXCore.overrides()
     }
     
-    public static func flags() -> [ROXVariant] {
+    public static func dynamicAPI() -> ROXDynamicAPI {
+        return ROXCore.dynamicAPI()
+    }
+    
+    public static func flags() -> [ROXString] {
         return ROXCore.flags()
+    }
+    
+    public static func shutdown() {
+        ROXCore.shutdown()
     }
 }

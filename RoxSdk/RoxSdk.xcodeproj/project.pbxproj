@@ -7,7 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		340C4C0D1F1249F9008865EB /* RoxEnumVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C4C0C1F1249F9008865EB /* RoxEnumVariant.swift */; };
+		340C4C0D1F1249F9008865EB /* RoxEnumString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C4C0C1F1249F9008865EB /* RoxEnumString.swift */; };
 		340E713C1EFAB27000A2C48E /* RoxSdk.h in Headers */ = {isa = PBXBuildFile; fileRef = 340E713A1EFAB27000A2C48E /* RoxSdk.h */; settings = {ATTRIBUTES = (Public, ); }; };
 		340E715C1EFAB6CC00A2C48E /* ROXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 340E715B1EFAB6CC00A2C48E /* ROXCore.framework */; };
 		340E71651EFABAC500A2C48E /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71601EFABAC500A2C48E /* Register.swift */; };
@@ -17,11 +17,13 @@
 		3479416A1FF54F52000BA731 /* ROX.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 347941611FF54F51000BA731 /* ROX.framework */; };
 		3479416F1FF54F52000BA731 /* ROXTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3479416E1FF54F52000BA731 /* ROXTests.swift */; };
 		347941711FF54F52000BA731 /* ROX.h in Headers */ = {isa = PBXBuildFile; fileRef = 347941631FF54F52000BA731 /* ROX.h */; settings = {ATTRIBUTES = (Public, ); }; };
-		3479417A1FF54FA4000BA731 /* RoxEnumVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C4C0C1F1249F9008865EB /* RoxEnumVariant.swift */; };
+		3479417A1FF54FA4000BA731 /* RoxEnumString.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340C4C0C1F1249F9008865EB /* RoxEnumString.swift */; };
 		3479417B1FF54FA4000BA731 /* Register.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71601EFABAC500A2C48E /* Register.swift */; };
 		3479417C1FF54FA4000BA731 /* ROX.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71611EFABAC500A2C48E /* ROX.swift */; };
 		3479417D1FF54FA4000BA731 /* RoxContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 340E71621EFABAC500A2C48E /* RoxContainer.swift */; };
 		34BBD2D12010F6DF0074F1F8 /* ROXCore.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 341977C31F178B2900360471 /* ROXCore.framework */; };
+		A1814A67267BD1D0004FE531 /* SwiftVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1814A66267BD1D0004FE531 /* SwiftVersion.swift */; };
+		A1814A68267BD1D6004FE531 /* SwiftVersion.swift in Sources */ = {isa = PBXBuildFile; fileRef = A1814A66267BD1D0004FE531 /* SwiftVersion.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -35,7 +37,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		340C4C0C1F1249F9008865EB /* RoxEnumVariant.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoxEnumVariant.swift; path = RoxSdk/RoxEnumVariant.swift; sourceTree = "<group>"; };
+		340C4C0C1F1249F9008865EB /* RoxEnumString.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RoxEnumString.swift; path = RoxSdk/RoxEnumString.swift; sourceTree = "<group>"; };
 		340E71371EFAB27000A2C48E /* ROX.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = ROX.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		340E713A1EFAB27000A2C48E /* RoxSdk.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; name = RoxSdk.h; path = RoxSdk/RoxSdk.h; sourceTree = "<group>"; };
 		340E713B1EFAB27000A2C48E /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; name = Info.plist; path = RoxSdk/Info.plist; sourceTree = "<group>"; };
@@ -54,6 +56,7 @@
 		347941791FF54F8A000BA731 /* ROXCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ROXCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		347941861FF5509D000BA731 /* ROXCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ROXCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		347941881FF56E99000BA731 /* ROXCore.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; path = ROXCore.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		A1814A66267BD1D0004FE531 /* SwiftVersion.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SwiftVersion.swift; path = RoxSdk/SwiftVersion.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -88,7 +91,8 @@
 		340E712D1EFAB27000A2C48E = {
 			isa = PBXGroup;
 			children = (
-				340C4C0C1F1249F9008865EB /* RoxEnumVariant.swift */,
+				A1814A66267BD1D0004FE531 /* SwiftVersion.swift */,
+				340C4C0C1F1249F9008865EB /* RoxEnumString.swift */,
 				340E71601EFABAC500A2C48E /* Register.swift */,
 				340E71611EFABAC500A2C48E /* ROX.swift */,
 				340E71621EFABAC500A2C48E /* RoxContainer.swift */,
@@ -297,7 +301,8 @@
 			files = (
 				340E71651EFABAC500A2C48E /* Register.swift in Sources */,
 				340E71671EFABAC500A2C48E /* RoxContainer.swift in Sources */,
-				340C4C0D1F1249F9008865EB /* RoxEnumVariant.swift in Sources */,
+				340C4C0D1F1249F9008865EB /* RoxEnumString.swift in Sources */,
+				A1814A67267BD1D0004FE531 /* SwiftVersion.swift in Sources */,
 				340E71661EFABAC500A2C48E /* ROX.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -306,9 +311,10 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				3479417A1FF54FA4000BA731 /* RoxEnumVariant.swift in Sources */,
+				3479417A1FF54FA4000BA731 /* RoxEnumString.swift in Sources */,
 				3479417B1FF54FA4000BA731 /* Register.swift in Sources */,
 				3479417C1FF54FA4000BA731 /* ROX.swift in Sources */,
+				A1814A68267BD1D6004FE531 /* SwiftVersion.swift in Sources */,
 				3479417D1FF54FA4000BA731 /* RoxContainer.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

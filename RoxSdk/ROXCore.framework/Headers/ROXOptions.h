@@ -7,15 +7,15 @@
 #import "ROXFreeze.h"
 #import "ROXFetcherResult.h"
 #import "ROXReportingValue.h"
-#import "ROXExperiment.h"
 #import "ROXSelfManagedOptions.h"
+#import "ROXDynamicPropertiesRule.h"
 
 /**
  :nodoc:
  */
 
 typedef void (^ROXConfigurationFetchedHandler)(ROXFetcherResult* _Nonnull result);
-typedef void (^ROXImpressionHandler)(ROXReportingValue* _Nonnull value, ROXExperiment* _Nullable experiment);
+typedef void (^ROXImpressionHandler)(ROXReportingValue* _Nonnull value);
 
 /**
  The enum to define SDK verbosilty level 
@@ -39,6 +39,8 @@ typedef NS_ENUM (NSUInteger, ROXOptionsVerboseLevel){
 @property (nonatomic, copy, nullable) ROXConfigurationFetchedHandler onConfigurationFetched;
 
 @property (nonatomic, copy, nullable) ROXImpressionHandler impressionHandler;
+
+@property (nonatomic, copy, nullable) ROXDynamicPropertiesRule dynamicPropertiesRule;
 /**
  :nodoc:
  */

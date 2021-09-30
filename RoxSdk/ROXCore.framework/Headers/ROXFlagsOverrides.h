@@ -7,7 +7,7 @@
 //
 
 #import <Foundation/Foundation.h>
-#import "ROXVariant.h"
+#import "ROXString.h"
 
 @protocol ROXDeviceProperties;
 @class ROXFeatureFlagsSetter;
@@ -21,7 +21,7 @@
 - (void)clearOverrideForName:(NSString*)featureName;
 - (void)clearOverrides;
 
-- (void)setOverride:(NSString*)value forFeature:(ROXVariant*)rolloutFeature;
-- (NSString*)originalValueForFeature:(ROXVariant*)feature;
+- (void)setOverride:(NSString*)value forFeature:(ROXString*)rolloutFeature;
+- (NSString*)originalValueForFeature:(ROXString*)feature;
 
 @end

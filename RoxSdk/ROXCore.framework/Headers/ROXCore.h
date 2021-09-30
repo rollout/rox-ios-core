@@ -1,5 +1,5 @@
 //
-//  ROXCore SDK version 4.10.16, Build 554
+//  ROXCore SDK version 5.0.0, Build 556
 //
 //  Copyright (c) 2017 rollout.io. All rights reserved.
 //
@@ -8,19 +8,27 @@
 #import <Foundation/Foundation.h>
 #import "ROXOptions.h"
 #import "ROXFlag.h"
-#import "ROXConfigurationString.h"
-#import "ROXConfigurationInt.h"
-#import "ROXConfigurationDouble.h"
-#import "ROXConfigurationBool.h"
+#import "ROXInt.h"
+#import "ROXDouble.h"
 #import "ROXBaseContainer.h"
-#import "ROXVariant.h"
+#import "ROXString.h"
 #import "ROXFreeze.h"
 #import "ROXFetcherResult.h"
 #import "ROXReportingValue.h"
-#import "ROXExperiment.h"
 #import "ROXFlagsOverrides.h"
+#import "ROXErrorHandling.h"
+#import "ROXDynamicAPI.h"
+#import "ROXDynamicPropertiesRule.h"
 
 #define ROX ROXCore
+
+typedef NS_ENUM(NSUInteger, ROXCoreState) {
+    ROXCoreState_Idle = 0,
+    ROXCoreState_SettingUp,
+    ROXCoreState_Set,
+    ROXCoreState_ShuttingDown,
+    ROXCoreState_Corrupted
+};
 
 /**
  ROXCore class is a static objc class that acts as an facade interface
@@ -44,7 +52,7 @@
  
  @param roxKey The app key (taken from ROX dashboard)
  */
-+(void)setupWithKey:(NSString *)roxKey;
++(void)setupWithKey:(NSString* _Nonnull)roxKey;
 
 /**
  Loads the SDK, usually called as part of `-[AppDelegate application:didFinishLaunchingWithOptions:]`
@@ -56,7 +64,13 @@
  @param roxKey The app key (taken from ROX dashboard)
  @param options setup options
  */
-+(void)setupWithKey:(NSString *)roxKey options:(ROXOptions *)options;
++(void)setupWithKey:(NSString * _Nonnull)roxKey options:(ROXOptions * _Nonnull)options;
+
++(void)setupWithKey:(NSString * _Nonnull)roxKey options:(ROXOptions * _Nonnull)options platformVersion:(NSString* _Nullable)platformVersion languageVersion:(NSString* _Nullable)languageVersion;
+
++(ROXCoreState)state;
+
++(void)shutdown;
 
 /**
  Register a container instance to ROX system.
@@ -64,9 +78,14 @@
  - @param container The instance to register, this instance values are fetched at `+setupWithKey:`, or when the app goes into foreground.
  - @note This method should be called **only once** for a given namespace.
  */
-+(void) register:(NSString *)namespace container:(ROXBaseContainer *)container;
++(void) register:(NSString * _Nonnull)namespace container:(ROXBaseContainer * _Nonnull)container;
 
-+(void) handleNamespace:(NSString *)namespace;
+/**
+  Register a container in the default namespace.
+ */
++(void) register:(ROXBaseContainer * _Nonnull)container;
+
++(void) handleNamespace:(NSString * _Nonnull)namespace;
 
 /**
  Unfreeze the state of all flags in code
@@ -77,7 +96,7 @@
  
  */
 +(void) unfreeze;
-+(void) unfreezeNamespace:(NSString*)ns;
++(void) unfreezeNamespace:(NSString* _Nonnull)ns;
 
 /**
  A view to control feature flags values locally on a mobile device or simulator.
@@ -88,7 +107,7 @@
  
  @return ViewController which shows the local feature flags and provides an interface to turn them on or off.
  */
-+ (UIViewController*)flagsViewController;
++ (UIViewController* _Nonnull)flagsViewController;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -99,7 +118,7 @@
  @param value The value of the custom property
  
  */
-+(void) setCustomStringProperty:(NSString*)value forKey:(NSString*)key;
++(void) setCustomStringProperty:(NSString* _Nonnull)value forKey:(NSString* _Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -110,7 +129,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedStringProperty:(NSString* (^)(NSString*))block forKey:(NSString*)key;
++(void) setCustomComputedStringProperty:(NSString* _Nullable (^_Nonnull)(NSString* _Nonnull, ROXDynamicPropertyContext* _Nonnull))block forKey:(NSString* _Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -121,7 +140,7 @@
  @param value The value of the custom property
  
  */
-+(void) setCustomBooleanProperty:(BOOL)value forKey:(NSString*)key;
++(void) setCustomBooleanProperty:(BOOL)value forKey:(NSString*_Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -132,7 +151,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedBooleanProperty:(BOOL (^)(NSString*))block forKey:(NSString*)key;
++(void) setCustomComputedBooleanProperty:(BOOL (^_Nullable)(NSString* _Nullable, ROXDynamicPropertyContext* _Nonnull))block forKey:(NSString*_Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -143,7 +162,7 @@
  @param value The value of the custom property
  
  */
-+(void) setCustomIntProperty:(int)value forKey:(NSString*)key;
++(void) setCustomIntProperty:(int)value forKey:(NSString* _Nullable)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -154,7 +173,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedIntProperty:(int (^)(NSString*))block forKey:(NSString*)key;
++(void) setCustomComputedIntProperty:(int (^_Nonnull)(NSString* _Nonnull, ROXDynamicPropertyContext* _Nonnull))block forKey:(NSString*_Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -165,7 +184,7 @@
  @param value The value of the custom property
  
  */
-+(void) setCustomDoubleProperty:(double)value forKey:(NSString*)key;
++(void) setCustomDoubleProperty:(double)value forKey:(NSString* _Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -176,7 +195,7 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedDoubleProperty:(double (^)(NSString*))block forKey:(NSString*)key;
++(void) setCustomComputedDoubleProperty:(double (^_Nonnull)(NSString* _Nonnull, ROXDynamicPropertyContext* _Nonnull))block forKey:(NSString*_Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -187,7 +206,7 @@
  @param value The value of the custom property
  
  */
-+(void) setCustomSemverProperty:(NSString*)value forKey:(NSString*)key;
++(void) setCustomSemverProperty:(NSString*_Nonnull)value forKey:(NSString* _Nonnull)key;
 
 /**
  Sets a custom property value that can be used when creating target groups.
@@ -198,36 +217,35 @@
  @param block this block will get invoked when trying to evaluate the value of the property
  
  */
-+(void) setCustomComputedSemverProperty:(NSString* (^)(NSString*))block forKey:(NSString*)key;
++(void) setCustomComputedSemverProperty:(NSString* _Nullable (^_Nonnull)(NSString* _Nonnull, ROXDynamicPropertyContext* _Nonnull))block forKey:(NSString*_Nonnull)key;
+
+/**
+  Sets a dynamic property context that will be used as a default for each flag evaluation.
+ */
++(void) setGlobalDynamicPropertyContext:(ROXDynamicPropertyContext* _Nullable)context;
 
 /**
  :nodoc:
  */
-+(void) setVariant:(ROXVariant*)variant forKey:(NSString*)key;
++(void) setVariant:(ROXString*_Nonnull)variant forKey:(NSString*_Nonnull)key;
 /**
  :nodoc:
  */
-+(ROXVariant*) variantWithKey:(NSString*)key;
-/**
- :nodoc:
- */
-+(void) setRemoteVariable:(ROXRemoteVariable*)remoteVariable forKey:(NSString*)key;
-/**
- :nodoc:
- */
-+(ROXRemoteVariable*) remoteVariableWithKey:(NSString*)key;
++(ROXString*_Nullable) variantWithKey:(NSString*_Nonnull)key;
 
 /**
  :nodoc:
  */
 +(void)fetch;
 
-+ (ROXFlagsOverrides*)overrides;
-+ (NSArray<ROXVariant*>*)flags;
++ (ROXFlagsOverrides*_Nonnull)overrides;
++ (ROXDynamicAPI*_Nonnull)dynamicAPI;
++ (NSArray<ROXString*>*_Nonnull)flags;
 
-#ifdef DEBUG
-void resetROXDispatchOnce(void);
-#endif
+/**
+ :nodoc:
+ */
++(void)setUserspaceUnhandledErrorHandler:(ROXUserspaceUnhandledErrorHandler _Nonnull)handler;
 
 @end
 
