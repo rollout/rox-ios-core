@@ -9,8 +9,8 @@
 #import <Foundation/Foundation.h>
 
 @interface ROXDynamicPropertyContext : NSObject<NSCopying>
--(instancetype)initWithValues:(NSDictionary* _Nonnull)values;
--(instancetype)initMerged:(ROXDynamicPropertyContext*  _Nonnull)globalContext localContext:(ROXDynamicPropertyContext*  _Nonnull)localContext;
+-(instancetype _Nullable)initWithValues:(NSDictionary* _Nonnull)values;
+-(instancetype _Nullable)initMerged:(ROXDynamicPropertyContext*  _Nonnull)globalContext localContext:(ROXDynamicPropertyContext*  _Nonnull)localContext;
 -(NSObject* _Nullable)get:(NSString* _Nonnull)propName;
 @end
 
