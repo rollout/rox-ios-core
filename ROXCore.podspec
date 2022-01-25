@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ROXCore"
-  s.version      = "5.0.10"
+  s.version      = "5.0.11"
   s.summary      = "Continuous Feature Rollouts for Mobile"
   s.description  = "Release mobile features quickly and safely with fully controlled rollouts, measure impact, and react as needed without waiting for your next code release."
 
@@ -15,16 +15,16 @@ Pod::Spec.new do |s|
                    }
   s.documentation_url = "http://support.rollout.io/"
 
-  s.requires_arc = true
+  s.source       = { :git => "https://github.com/rollout/rox-core-spm.git", :tag => "#{s.version}" }
 
-  s.ios.vendored_frameworks = 'RoxSdk/ROXCore.framework'
-  s.tvos.vendored_frameworks = 'RoxSdk/ROXCore.framework'
+  s.vendored_frameworks = "ROXCore.xcframework"
 
-  s.xcconfig = { 'FRAMEWORK_SEARCH_PATHS' => '$(inherited)' }
+  s.platform = :ios
 
-  s.source       = { :git => "https://github.com/rollout/rox-ios-core.git", :tag => "5.0.10" }
-  s.preserve_paths = "lib/**/*", "install/**/*"
+  s.swift_version = '4.0'
 
   s.ios.deployment_target  = '8.0'
-  s.tvos.deployment_target  = '10.0'
+  s.ios.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', }
+  s.ios.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
+
 end
