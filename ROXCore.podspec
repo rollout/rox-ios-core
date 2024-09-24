@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ROXCore"
-  s.version      = "6.0.3"
+  s.version      = "6.0.4"
   s.summary      = "Continuous Feature Rollouts for Mobile"
   s.description  = "Release mobile features quickly and safely with fully controlled rollouts, measure impact, and react as needed without waiting for your next code release."
 
