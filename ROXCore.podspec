@@ -1,7 +1,7 @@
 Pod::Spec.new do |s|
 
   s.name         = "ROXCore"
-  s.version      = "6.1.0"
+  s.version      = "6.1.1"
   s.summary      = "Continuous Feature Rollouts for Mobile"
   s.description  = "Release mobile features quickly and safely with fully controlled rollouts, measure impact, and react as needed without waiting for your next code release."
 
@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.swift_version = '4.0'
 
-  s.ios.deployment_target  = '12.0'
+  s.ios.deployment_target  = '8.0'
   s.ios.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', }
   s.ios.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
