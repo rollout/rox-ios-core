@@ -23,7 +23,7 @@ Pod::Spec.new do |s|
 
   s.swift_version = '4.0'
 
-  s.ios.deployment_target  = '8.0'
+  s.ios.deployment_target  = '12.0'
   s.ios.pod_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64', }
   s.ios.user_target_xcconfig = { 'EXCLUDED_ARCHS[sdk=iphonesimulator*]' => 'arm64' }
 
